@@ -67,6 +67,14 @@ func (l *LEDConfig) GetCoordinates() ([][]int, error) {
 	return cordsToDraw, nil
 }
 
+func (l *LEDConfig) GetCathode() common.Coordinate {
+	return common.NewCord(l.StartX+5, l.StartY-1)
+}
+
+func (l *LEDConfig) GetAnode() common.Coordinate {
+	return common.NewCord(l.StartX+5, l.StartY+len(ledPixels))
+}
+
 func validatePixelArray(pixelArray [][]int) error {
 	width := len(pixelArray[0])
 	for i, row := range pixelArray {

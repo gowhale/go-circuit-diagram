@@ -41,14 +41,20 @@ func main() {
 	board.AddElement(&wire5)
 
 	// Add some GPIOS
-	gpio1 := components.NewGPIO(30, 3)
+	gpio1 := components.NewGPIO(common.NewCord(30, 3))
 	board.AddElement(&gpio1)
 
-	gpio2 := components.NewGPIO(10, 3)
+	gpio2 := components.NewGPIO(common.NewCord(10, 3))
 	board.AddElement(&gpio2)
 
-	gpio3 := components.NewGPIO(10, 92)
+	gpio3 := components.NewGPIO(common.NewCord(10, 92))
 	board.AddElement(&gpio3)
+
+	gpio4 := components.NewGPIO(led3.GetCathode())
+	board.AddElement(&gpio4)
+
+	gpio5 := components.NewGPIO(led3.GetAnode())
+	board.AddElement(&gpio5)
 
 	err = board.Draw(realOS)
 	if err != nil {
