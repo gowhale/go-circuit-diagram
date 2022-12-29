@@ -14,15 +14,17 @@ import (
 type Board struct {
 	name          string
 	width, height int
+	magnification int
 	elements      []components.Element
 }
 
 // NewBoard returns a new Board struct to add components to
-func NewBoard(name string, width, height int) Board {
+func NewBoard(name string, width, height, magnification int) Board {
 	return Board{
-		name:   name,
-		width:  width,
-		height: height,
+		name:          name,
+		width:         width,
+		height:        height,
+		magnification: magnification,
 	}
 }
 
@@ -31,14 +33,30 @@ func (b *Board) AddElement(elem components.Element) {
 	b.elements = append(b.elements, elem)
 }
 
+func enlargeCoordintes(coords [][]int, scale int) [][]int {
+	newCoords := [][]int{}
+	for _, cord := range coords {
+		x := cord[0]
+		y := cord[1]
+		for i := 0; i < scale; i++ {
+			for j := 0; j < scale; j++ {
+				newCoords = append(newCoords, []int{(x * (scale - 1)) + x + i, (y * (scale - 1)) + y + j})
+			}
+		}
+	}
+
+	return newCoords
+}
+
 func (b *Board) fillCoordinates(img *image.RGBA, elem components.Element) error {
 	cords, err := elem.GetCoordinates()
 	if err != nil {
 		return err
 	}
+	cords = enlargeCoordintes(cords, b.magnification)
 	warning := false
 	for _, cord := range cords {
-		if cord[0] < b.width && cord[1] < b.height {
+		if cord[0] < (b.width*b.magnification) && cord[1] < (b.height*b.magnification) {
 			img.Set(cord[0], cord[1], elem.GetColour())
 		} else {
 			warning = true
@@ -52,8 +70,8 @@ func (b *Board) fillCoordinates(img *image.RGBA, elem components.Element) error 
 
 // Draw creates image with all components drawn on
 func (b *Board) Draw(o common.OS) error {
-	width := b.width
-	height := b.height
+	width := b.width * b.magnification
+	height := b.height * b.magnification
 
 	upLeft := image.Point{0, 0}
 	lowRight := image.Point{width, height}

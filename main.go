@@ -16,7 +16,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	board := canvas.NewBoard("test", 100, 100)
+	board := canvas.NewBoard("test", 100, 100, 10)
 
 	// Adding some LEDS
 	led1 := components.NewLED(common.NewCord(5, 5))
