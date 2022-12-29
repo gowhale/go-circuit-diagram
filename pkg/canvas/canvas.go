@@ -10,12 +10,14 @@ import (
 	"log"
 )
 
+// Board represents a board to add components to
 type Board struct {
 	name          string
 	width, height int
 	elements      []components.Element
 }
 
+// NewBoard returns a new Board struct to add components to
 func NewBoard(name string, width, height int) Board {
 	return Board{
 		name:   name,
@@ -24,6 +26,7 @@ func NewBoard(name string, width, height int) Board {
 	}
 }
 
+// AddElement adds an elemnt which is rendered when Draw is called
 func (b *Board) AddElement(elem components.Element) {
 	b.elements = append(b.elements, elem)
 }
@@ -42,6 +45,7 @@ func (b *Board) fillCoordinates(img *image.RGBA, cords [][]int) {
 	}
 }
 
+// Draw creates image with all components drawn on
 func (b *Board) Draw(o common.OS) error {
 	width := b.width
 	height := b.height

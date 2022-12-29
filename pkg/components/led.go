@@ -33,11 +33,13 @@ var ledPixels = [][]int{
 	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
 }
 
+// LEDConfig is configuration for an LED component
 type LEDConfig struct {
 	StartX, StartY int
 	LedPixels      [][]int
 }
 
+// NewLED returns a LED config starting from specified x,y
 func NewLED(startX, startY int) LEDConfig {
 	return LEDConfig{
 		StartX:    startX,
@@ -46,6 +48,7 @@ func NewLED(startX, startY int) LEDConfig {
 	}
 }
 
+// GetCoordinates calculates cords to draw onto a canvas
 func (l *LEDConfig) GetCoordinates() [][]int {
 	cordsToDraw := [][]int{}
 	for x := range l.LedPixels[0] {
