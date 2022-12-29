@@ -22,7 +22,7 @@ const (
 
 var excludedPkgs = map[string]bool{
 	"go-circuit-diagram":           true,
-	"go-circuit-diagram/pkg/fruit": true,
+	"go-circuit-diagram/pkg/common": true,
 }
 
 func main() {
