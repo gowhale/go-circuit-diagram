@@ -29,15 +29,15 @@ func main() {
 	board.AddElement(&led4)
 
 	// Add some wires
-	wire := components.NewWire(30, 20, 30, 50)
+	wire := components.NewWire(common.NewCord(30, 20), common.NewCord(30, 50))
 	board.AddElement(&wire)
-	wire2 := components.NewWire(10, 50, 70, 50)
+	wire2 := components.NewWire(common.NewCord(10, 50), common.NewCord(70, 50))
 	board.AddElement(&wire2)
-	wire3 := components.NewWire(10, 20, 10, 50)
+	wire3 := components.NewWire(common.NewCord(10, 20), common.NewCord(10, 50))
 	board.AddElement(&wire3)
-	wire4 := components.NewWire(10, 65, 70, 65)
+	wire4 := components.NewWire(common.NewCord(10, 65), common.NewCord(70, 65))
 	board.AddElement(&wire4)
-	wire5 := components.NewWire(10, 65, 10, 75)
+	wire5 := components.NewWire(common.NewCord(10, 65), common.NewCord(10, 75))
 	board.AddElement(&wire5)
 
 	// Add some GPIOS
