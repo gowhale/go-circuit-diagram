@@ -3,7 +3,9 @@ A repo to create circuit diagrams!
 
 ## Summary
 
-So far I the main prog creates a a PNG of an LED which you can find in the images folder. 
+So far I the main prog creates a a PNG of an LED which you can find in the images folder.
+
+It also creates a board with multiple LED's painted onto it which you can find in the images folder.
 
 ## Actions created by this template:
 
