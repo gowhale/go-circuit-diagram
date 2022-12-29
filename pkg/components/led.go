@@ -67,10 +67,12 @@ func (l *LEDConfig) GetCoordinates() ([][]int, error) {
 	return cordsToDraw, nil
 }
 
+// GetCathode gets the LED's cathode coord
 func (l *LEDConfig) GetCathode() common.Coordinate {
 	return common.NewCord(l.StartX+5, l.StartY-1)
 }
 
+// GetAnode gets the LED's anode coord
 func (l *LEDConfig) GetAnode() common.Coordinate {
 	return common.NewCord(l.StartX+5, l.StartY+len(ledPixels))
 }
