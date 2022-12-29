@@ -1,0 +1,22 @@
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+      - main
+  pull_request:
+name: Tests And Coverage
+jobs:
+  test-and-coverage:
+    strategy:
+      matrix:
+        go-version: [1.19.x]
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/setup-go@v3
+      with:
+        go-version: ${{ matrix.go-version }}
+    - uses: actions/checkout@v3
+    - run: go run ./cmd/pkg-cover

@@ -1,0 +1,43 @@
+severity = "error"
+errorCode = 1
+enableAllRules = true
+
+[rule.max-public-structs]
+    arguments=[5]
+    disabled=false
+
+[rule.cyclomatic]
+    arguments=[12]
+    disabled=false
+
+[rule.file-header]
+    disabled=true
+    arguments =["This is the text that must appear at the top of source files."]
+
+[rule.function-length]
+    disabled=true
+
+[rule.cognitive-complexity]
+    arguments=[12]
+    disabled=false
+
+[rule.line-length-limit]
+    disabled=true
+
+[rule.deep-exit]
+    disabled=true
+
+[rule.banned-characters]
+    disabled=true
+
+[rule.function-result-limit]
+    disabled=true
+
+[rule.argument-limit]
+    disabled=true
+
+[rule.use-any]
+    disabled=true
+
+[rule.package-comments]
+    disabled=false

@@ -1,0 +1,17 @@
+# SET THE PROJECT_PAT AND BOARD_URL IN YOUR SECRETS SETTING
+name: Add New Issue To Project Board
+
+on:
+  issues:
+    types:
+      - opened
+      
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@main
+        with:
+          project-url: ${{ secrets.BOARD_URL }}
+          github-token: ${{ secrets.PROJECT_PAT }}

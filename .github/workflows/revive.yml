@@ -1,0 +1,34 @@
+name: Lint Revive
+on:
+  push:
+    paths:
+    - '**.go'
+    - 'revive.toml'
+    - '.github/workflows/lint.yaml'
+    tags:
+      - v*
+    branches:
+      - master
+      - main
+  pull_request:
+
+jobs:
+  lint-revive:
+    name: Lint Revive
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.19'
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v3
+
+    - name: Run Revive Action
+      id: revive-output
+      uses: docker://morphy/revive-action:v2
+      with:
+        config: revive.toml
+
