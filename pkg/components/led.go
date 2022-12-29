@@ -34,18 +34,17 @@ var ledPixels = [][]int{
 
 // LEDConfig is configuration for an LED component
 type LEDConfig struct {
-	StartX, StartY int
-	LedPixels      [][]int
-	Colour         color.Color
+	startCoord common.Coordinate
+	LedPixels  [][]int
+	Colour     color.Color
 }
 
 // NewLED returns a LED config starting from specified x,y
-func NewLED(startX, startY int) LEDConfig {
+func NewLED(startCoord common.Coordinate) LEDConfig {
 	return LEDConfig{
-		StartX:    startX,
-		StartY:    startY,
-		LedPixels: ledPixels,
-		Colour:    color.Black,
+		startCoord: startCoord,
+		LedPixels:  ledPixels,
+		Colour:     color.Black,
 	}
 }
 
@@ -60,7 +59,7 @@ func (l *LEDConfig) GetCoordinates() ([][]int, error) {
 	for x := range l.LedPixels[0] {
 		for y := range l.LedPixels {
 			if l.LedPixels[y][x] == pixelFill {
-				cordsToDraw = append(cordsToDraw, []int{x + l.StartX, y + l.StartY})
+				cordsToDraw = append(cordsToDraw, []int{x + l.startCoord.X(), y + l.startCoord.Y()})
 			}
 		}
 	}
@@ -69,12 +68,12 @@ func (l *LEDConfig) GetCoordinates() ([][]int, error) {
 
 // GetCathode gets the LED's cathode coord
 func (l *LEDConfig) GetCathode() common.Coordinate {
-	return common.NewCord(l.StartX+5, l.StartY-1)
+	return common.NewCord(l.startCoord.Y()+5, l.startCoord.Y()-1)
 }
 
 // GetAnode gets the LED's anode coord
 func (l *LEDConfig) GetAnode() common.Coordinate {
-	return common.NewCord(l.StartX+5, l.StartY+len(ledPixels))
+	return common.NewCord(l.startCoord.X()+5, l.startCoord.Y()+len(ledPixels))
 }
 
 func validatePixelArray(pixelArray [][]int) error {

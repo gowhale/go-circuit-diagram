@@ -25,7 +25,7 @@ type mainTest struct {
 
 func (m *mainTest) SetupTest() {
 	m.mockOS = new(common.MockOS)
-	m.testLed = components.NewLED(0, 0)
+	m.testLed = components.NewLED(common.NewCord(0, 0))
 }
 
 func TestMainTest(t *testing.T) {
