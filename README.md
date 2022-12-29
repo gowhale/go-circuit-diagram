@@ -1,6 +1,10 @@
 # go-circuit-diagram
 A repo to create circuit diagrams!
 
+## Summary
+
+So far I the main prog creates a a PNG of an LED which you can find in the images folder. 
+
 ## Actions created by this template:
 
 ### Testing
