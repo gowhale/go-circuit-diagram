@@ -1,4 +1,3 @@
-// Package components contains code for drawing electronical components
 package components
 
 import (
@@ -49,7 +48,7 @@ func NewLED(startX, startY int) LEDConfig {
 }
 
 // GetCoordinates calculates cords to draw onto a canvas
-func (l *LEDConfig) GetCoordinates() [][]int {
+func (l *LEDConfig) GetCoordinates() ([][]int, error) {
 	cordsToDraw := [][]int{}
 	for x := range l.LedPixels[0] {
 		for y := range l.LedPixels {
@@ -58,7 +57,7 @@ func (l *LEDConfig) GetCoordinates() [][]int {
 			}
 		}
 	}
-	return cordsToDraw
+	return cordsToDraw, nil
 }
 
 func validatePixelArray(pixelArray [][]int) error {
