@@ -31,11 +31,15 @@ func (b *Board) AddElement(elem components.Element) {
 	b.elements = append(b.elements, elem)
 }
 
-func (b *Board) fillCoordinates(img *image.RGBA, cords [][]int) {
+func (b *Board) fillCoordinates(img *image.RGBA, elem components.Element) error {
+	cords, err := elem.GetCoordinates()
+	if err != nil {
+		return err
+	}
 	warning := false
 	for _, cord := range cords {
 		if cord[0] < b.width && cord[1] < b.height {
-			img.Set(cord[0], cord[1], color.Black)
+			img.Set(cord[0], cord[1], elem.GetColour())
 		} else {
 			warning = true
 		}
@@ -43,6 +47,7 @@ func (b *Board) fillCoordinates(img *image.RGBA, cords [][]int) {
 	if warning {
 		log.Println("WARNING: some of this elements contents will not be shown as out of bounds")
 	}
+	return nil
 }
 
 // Draw creates image with all components drawn on
@@ -63,11 +68,9 @@ func (b *Board) Draw(o common.OS) error {
 	}
 
 	for _, elem := range b.elements {
-		cordsToDraw, err := elem.GetCoordinates()
-		if err != nil {
+		if err := b.fillCoordinates(img, elem); err != nil {
 			return err
 		}
-		b.fillCoordinates(img, cordsToDraw)
 	}
 
 	f, err := o.Create(fmt.Sprintf("images/%s.png", b.name))

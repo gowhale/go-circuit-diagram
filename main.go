@@ -40,6 +40,16 @@ func main() {
 	wire5 := components.NewWire(10, 65, 10, 75)
 	board.AddElement(&wire5)
 
+	// Add some GPIOS
+	gpio1 := components.NewGPIO(30, 3)
+	board.AddElement(&gpio1)
+
+	gpio2 := components.NewGPIO(10, 3)
+	board.AddElement(&gpio2)
+
+	gpio3 := components.NewGPIO(10, 92)
+	board.AddElement(&gpio3)
+
 	err = board.Draw(realOS)
 	if err != nil {
 		log.Fatalln(err)

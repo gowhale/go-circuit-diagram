@@ -2,6 +2,7 @@ package components
 
 import (
 	"fmt"
+	"image/color"
 	"testing"
 
 	"go-circuit-diagram/pkg/common"
@@ -37,6 +38,7 @@ func (m *ledTest) Test_NewLED() {
 		StartX:    0,
 		StartY:    0,
 		LedPixels: ledPixels,
+		Colour:    color.Black,
 	}
 	l := NewLED(0, 0)
 	m.Equal(expectedL, l)
@@ -71,4 +73,9 @@ func (m *ledTest) TestDrawLED_Invalid_Pixel_Config_Error() {
 		{pixelEmpt, 21},
 	})
 	m.EqualError(err, "pixel value not handled")
+}
+
+func (m *ledTest) Test_GetColour() {
+	l := NewLED(0, 0)
+	m.Equal(color.Black, l.GetColour())
 }
