@@ -7,6 +7,7 @@ import (
 	"go-circuit-diagram/pkg/components"
 	"image"
 	"image/color"
+	"log"
 )
 
 type Board struct {
@@ -28,10 +29,16 @@ func (b *Board) AddElement(elem components.Element) {
 }
 
 func (b *Board) fillCoordinates(img *image.RGBA, cords [][]int) {
+	warning := false
 	for _, cord := range cords {
 		if cord[0] < b.width && cord[1] < b.height {
 			img.Set(cord[0], cord[1], color.Black)
+		} else {
+			warning = true
 		}
+	}
+	if warning {
+		log.Println("WARNING: some of this elements contents will not be shown as out of bounds")
 	}
 }
 

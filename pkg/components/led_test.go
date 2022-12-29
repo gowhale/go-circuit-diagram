@@ -36,6 +36,16 @@ func (m *mainTest) TestDrawLED_Pass() {
 	m.Nil(err)
 }
 
+func (m *mainTest) Test_NewLED() {
+	expectedL := LEDConfig{
+		StartX:    0,
+		StartY:    0,
+		LedPixels: ledPixels,
+	}
+	l := NewLED(0, 0)
+	m.Equal(expectedL, l)
+}
+
 func (m *mainTest) TestDrawLED_Encode_Error() {
 	m.mockOS.On(createFunc, ledFileName).Return(nil, nil)
 	m.mockOS.On("Encode", mock.Anything, mock.Anything).Return(fmt.Errorf("encode err"))
