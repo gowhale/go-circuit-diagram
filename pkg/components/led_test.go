@@ -53,16 +53,16 @@ func (m *mainTest) TestDrawLED_Create_Error() {
 
 func (m *mainTest) TestDrawLED_Invalid_Pixels_Error() {
 	err := drawLEDImpl(m.mockOS, [][]int{
-		{pixelEmpty, pixelFilled},
-		{pixelEmpty},
+		{pixelEmpt, pixelFill},
+		{pixelEmpt},
 	})
 	m.EqualError(err, "row #2 is not same width as first row #1")
 }
 
 func (m *mainTest) TestDrawLED_Invalid_Pixel_Config_Error() {
 	err := drawLEDImpl(m.mockOS, [][]int{
-		{pixelEmpty, pixelFilled},
-		{pixelEmpty, 21},
+		{pixelEmpt, pixelFill},
+		{pixelEmpt, 21},
 	})
 	m.EqualError(err, "pixel value not handled")
 }

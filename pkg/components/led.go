@@ -9,28 +9,28 @@ import (
 )
 
 const (
-	pixelEmpty  = 0
-	pixelFilled = 1
+	pixelEmpt   = 0
+	pixelFill   = 1
 	ledFileName = "images/led.png"
 )
 
 var ledPixels = [][]int{
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty},
-	{pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled},
-	{pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled, pixelFilled},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
-	{pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty, pixelFilled, pixelEmpty, pixelEmpty, pixelEmpty, pixelEmpty},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelFill, pixelFill},
+	{pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelEmpt, pixelEmpt, pixelFill, pixelFill},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelFill},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
 }
 
 func validatePixelArray(pixelArray [][]int) error {
@@ -66,9 +66,9 @@ func drawLEDImpl(o common.OS, pixelArray [][]int) error {
 	for x := 0; x < width; x++ {
 		for y := 0; y < height; y++ {
 			switch {
-			case pixelArray[y][x] == pixelEmpty: // upper left quadrant
+			case pixelArray[y][x] == pixelEmpt: // upper left quadrant
 				img.Set(x, y, color.White)
-			case pixelArray[y][x] == pixelFilled: // lower right quadrant
+			case pixelArray[y][x] == pixelFill: // lower right quadrant
 				img.Set(x, y, color.Black)
 			default:
 				return fmt.Errorf("pixel value not handled")
