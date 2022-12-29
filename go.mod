@@ -1,4 +1,4 @@
-module golang-repo-template
+module go-circuit-diagram
 
 go 1.17
 
