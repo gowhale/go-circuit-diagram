@@ -63,7 +63,10 @@ func (b *Board) Draw(o common.OS) error {
 	}
 
 	for _, elem := range b.elements {
-		cordsToDraw := elem.GetCoordinates()
+		cordsToDraw, err := elem.GetCoordinates()
+		if err != nil {
+			return err
+		}
 		b.fillCoordinates(img, cordsToDraw)
 	}
 

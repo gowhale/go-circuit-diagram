@@ -17,6 +17,8 @@ func main() {
 	}
 
 	board := canvas.NewBoard("test", 100, 100)
+
+	// Adding some LEDS
 	led1 := components.NewLED(5, 5)
 	board.AddElement(&led1)
 	led2 := components.NewLED(25, 5)
@@ -25,6 +27,19 @@ func main() {
 	board.AddElement(&led3)
 	led4 := components.NewLED(5, 75)
 	board.AddElement(&led4)
+
+	// Add some wires
+	wire := components.NewWire(30, 20, 30, 50)
+	board.AddElement(&wire)
+	wire2 := components.NewWire(10, 50, 70, 50)
+	board.AddElement(&wire2)
+	wire3 := components.NewWire(10, 20, 10, 50)
+	board.AddElement(&wire3)
+	wire4 := components.NewWire(10, 65, 70, 65)
+	board.AddElement(&wire4)
+	wire5 := components.NewWire(10, 65, 10, 75)
+	board.AddElement(&wire5)
+
 	err = board.Draw(realOS)
 	if err != nil {
 		log.Fatalln(err)
