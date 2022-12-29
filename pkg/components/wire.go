@@ -8,7 +8,8 @@ type WireConfig struct {
 	EndX, EndY     int
 }
 
-// NewLED returns a LED config starting from specified x,y
+// NewWire returns a Wire config starting from specified x,y and ending at x,y
+// Note: only straight lines currently supported
 func NewWire(startX, startY, endX, endY int) WireConfig {
 	return WireConfig{
 		StartX: startX,
