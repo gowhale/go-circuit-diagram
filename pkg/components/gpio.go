@@ -1,18 +1,20 @@
 package components
 
-import "image/color"
+import (
+	"go-circuit-diagram/pkg/common"
+	"image/color"
+)
 
 // GPIOConfig is configuration for a line on the canvas
 type GPIOConfig struct {
-	StartX, StartY int
-	Colour         color.Color
+	cord   common.Coordinate
+	Colour color.Color
 }
 
 // NewGPIO returns a GPIO config starting at specified x,y
-func NewGPIO(startX, startY int) GPIOConfig {
+func NewGPIO(cord common.Coordinate) GPIOConfig {
 	return GPIOConfig{
-		StartX: startX,
-		StartY: startY,
+		cord:   cord,
 		Colour: color.RGBA{0, 255, 0, 0xff},
 	}
 }
@@ -25,13 +27,13 @@ func (g *GPIOConfig) GetColour() color.Color {
 // GetCoordinates calculates cords to draw onto a canvas
 func (g *GPIOConfig) GetCoordinates() ([][]int, error) {
 	cords := [][]int{}
-	cords = append(cords, []int{g.StartX - 1, g.StartY})
-	cords = append(cords, []int{g.StartX + 1, g.StartY})
-	cords = append(cords, []int{g.StartX + 1, g.StartY + 1})
-	cords = append(cords, []int{g.StartX - 1, g.StartY + 1})
-	cords = append(cords, []int{g.StartX, g.StartY - 1})
-	cords = append(cords, []int{g.StartX, g.StartY + 1})
-	cords = append(cords, []int{g.StartX - 1, g.StartY - 1})
-	cords = append(cords, []int{g.StartX + 1, g.StartY - 1})
+	cords = append(cords, []int{g.cord.GetX() - 1, g.cord.GetY()})
+	cords = append(cords, []int{g.cord.GetX() + 1, g.cord.GetY()})
+	cords = append(cords, []int{g.cord.GetX() + 1, g.cord.GetY() + 1})
+	cords = append(cords, []int{g.cord.GetX() - 1, g.cord.GetY() + 1})
+	cords = append(cords, []int{g.cord.GetX(), g.cord.GetY() - 1})
+	cords = append(cords, []int{g.cord.GetX(), g.cord.GetY() + 1})
+	cords = append(cords, []int{g.cord.GetX() - 1, g.cord.GetY() - 1})
+	cords = append(cords, []int{g.cord.GetX() + 1, g.cord.GetY() - 1})
 	return cords, nil
 }

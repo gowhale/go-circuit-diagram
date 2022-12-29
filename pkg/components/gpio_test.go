@@ -1,6 +1,7 @@
 package components
 
 import (
+	"go-circuit-diagram/pkg/common"
 	"image/color"
 	"testing"
 
@@ -19,11 +20,10 @@ func Test_GPIO(t *testing.T) {
 
 func (g *gpioTest) Test_NewGPIO() {
 	expectedW := GPIOConfig{
-		StartX: 0,
-		StartY: 0,
+		cord:   common.NewCord(0, 0),
 		Colour: color.RGBA{0, 255, 0, 0xff},
 	}
-	w := NewGPIO(0, 0)
+	w := NewGPIO(common.NewCord(0, 0))
 	g.Equal(expectedW, w)
 }
 
@@ -37,13 +37,13 @@ func (g *gpioTest) Test_GetCoordinates() {
 		{5, 6},
 		{4, 4},
 		{6, 4}}
-	w := NewGPIO(5, 5)
+	w := NewGPIO(common.NewCord(5, 5))
 	cords, err := w.GetCoordinates()
 	g.Nil(err)
 	g.Equal(expectedCords, cords)
 }
 
 func (g *gpioTest) Test_GetColour() {
-	w := NewGPIO(5, 5)
+	w := NewGPIO(common.NewCord(5, 5))
 	g.Equal(color.RGBA{0, 255, 0, 0xff}, w.GetColour())
 }

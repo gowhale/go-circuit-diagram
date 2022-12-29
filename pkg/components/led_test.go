@@ -35,12 +35,11 @@ func (m *ledTest) TestDrawLED_Pass() {
 
 func (m *ledTest) Test_NewLED() {
 	expectedL := LEDConfig{
-		StartX:    0,
-		StartY:    0,
-		LedPixels: ledPixels,
-		Colour:    color.Black,
+		startCoord: common.NewCord(0, 0),
+		LedPixels:  ledPixels,
+		Colour:     color.Black,
 	}
-	l := NewLED(0, 0)
+	l := NewLED(common.NewCord(0, 0))
 	m.Equal(expectedL, l)
 }
 
@@ -76,6 +75,6 @@ func (m *ledTest) TestDrawLED_Invalid_Pixel_Config_Error() {
 }
 
 func (m *ledTest) Test_GetColour() {
-	l := NewLED(0, 0)
+	l := NewLED(common.NewCord(0, 0))
 	m.Equal(color.Black, l.GetColour())
 }

@@ -2,25 +2,24 @@ package components
 
 import (
 	"fmt"
+	"go-circuit-diagram/pkg/common"
 	"image/color"
 )
 
 // WireConfig is configuration for a line on the canvas
 type WireConfig struct {
-	StartX, StartY int
-	EndX, EndY     int
-	Colour         color.Color
+	startCoord common.Coordinate
+	endCoord   common.Coordinate
+	Colour     color.Color
 }
 
 // NewWire returns a Wire config starting from specified x,y and ending at x,y
 // Note: only straight lines currently supported
-func NewWire(startX, startY, endX, endY int) WireConfig {
+func NewWire(startCoord, endCoord common.Coordinate) WireConfig {
 	return WireConfig{
-		StartX: startX,
-		StartY: startY,
-		EndX:   endX,
-		EndY:   endY,
-		Colour: color.Black,
+		startCoord: startCoord,
+		endCoord:   endCoord,
+		Colour:     color.Black,
 	}
 }
 
@@ -29,25 +28,48 @@ func (w *WireConfig) GetColour() color.Color {
 	return w.Colour
 }
 
+func verticalCoords(w *WireConfig) [][]int {
+	lineCords := [][]int{}
+
+	for y := w.startCoord.GetY(); y < w.endCoord.GetY()+1; y++ {
+		lineCords = append(lineCords, []int{w.startCoord.GetX(), y})
+	}
+	if len(lineCords) == 0 {
+		for y := w.endCoord.GetY(); y < w.startCoord.GetY()+1; y++ {
+			lineCords = append(lineCords, []int{w.startCoord.GetX(), y})
+		}
+	}
+
+	return lineCords
+}
+
+func horizontal(w *WireConfig) [][]int {
+	lineCords := [][]int{}
+
+	for x := w.startCoord.GetX(); x < w.endCoord.GetX()+1; x++ {
+		lineCords = append(lineCords, []int{x, w.startCoord.GetY()})
+	}
+	if len(lineCords) == 0 {
+		for x := w.endCoord.GetX(); x < w.startCoord.GetX()+1; x++ {
+			lineCords = append(lineCords, []int{x, w.startCoord.GetY()})
+		}
+	}
+
+	return lineCords
+}
+
 // GetCoordinates calculates cords to draw onto a canvas
 func (w *WireConfig) GetCoordinates() ([][]int, error) {
-	if w.StartX != w.EndX && w.StartY != w.EndY {
+	if w.startCoord.GetX() != w.endCoord.GetX() && w.startCoord.GetY() != w.endCoord.GetY() {
 		return [][]int{}, fmt.Errorf("only straight lines, horizontal or vertical")
 	}
 
-	lineCords := [][]int{}
-
 	// vertical line
-	if w.StartX == w.EndX {
-		for y := w.StartY; y < w.EndY; y++ {
-			lineCords = append(lineCords, []int{w.StartX, y})
-		}
-		return lineCords, nil
+	if w.startCoord.GetX() == w.endCoord.GetX() {
+		return verticalCoords(w), nil
 	}
 
 	// horizontal line
-	for x := w.StartX; x < w.EndX; x++ {
-		lineCords = append(lineCords, []int{x, w.StartY})
-	}
-	return lineCords, nil
+
+	return horizontal(w), nil
 }
