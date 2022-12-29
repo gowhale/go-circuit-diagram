@@ -1,3 +1,5 @@
 package components
 
-type Element interface{}
+type Element interface {
+	GetCoordinates() [][]int
+}

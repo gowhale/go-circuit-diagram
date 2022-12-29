@@ -33,6 +33,31 @@ var ledPixels = [][]int{
 	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
 }
 
+type LEDConfig struct {
+	StartX, StartY int
+	LedPixels      [][]int
+}
+
+func NewLED(startX, startY int) LEDConfig {
+	return LEDConfig{
+		StartX:    startX,
+		StartY:    startY,
+		LedPixels: ledPixels,
+	}
+}
+
+func (l *LEDConfig) GetCoordinates() [][]int {
+	cordsToDraw := [][]int{}
+	for x := range l.LedPixels[0] {
+		for y := range l.LedPixels {
+			if l.LedPixels[y][x] == pixelFill {
+				cordsToDraw = append(cordsToDraw, []int{x + l.StartX, y + l.StartY})
+			}
+		}
+	}
+	return cordsToDraw
+}
+
 func validatePixelArray(pixelArray [][]int) error {
 	width := len(pixelArray[0])
 	for i, row := range pixelArray {

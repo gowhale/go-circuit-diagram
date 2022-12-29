@@ -23,6 +23,18 @@ func NewBoard(name string, width, height int) Board {
 	}
 }
 
+func (b *Board) AddElement(elem components.Element) {
+	b.elements = append(b.elements, elem)
+}
+
+func (b *Board) fillCoordinates(img *image.RGBA, cords [][]int) {
+	for _, cord := range cords {
+		if cord[0] < b.width && cord[1] < b.height {
+			img.Set(cord[0], cord[1], color.Black)
+		}
+	}
+}
+
 func (b *Board) Draw(o common.OS) error {
 	width := b.width
 	height := b.height
@@ -37,6 +49,11 @@ func (b *Board) Draw(o common.OS) error {
 		for y := 0; y < height; y++ {
 			img.Set(x, y, color.White)
 		}
+	}
+
+	for _, elem := range b.elements {
+		cordsToDraw := elem.GetCoordinates()
+		b.fillCoordinates(img, cordsToDraw)
 	}
 
 	f, err := o.Create(fmt.Sprintf("images/%s.png", b.name))
