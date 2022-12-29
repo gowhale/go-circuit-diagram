@@ -1,6 +1,7 @@
 package components
 
 import (
+	"image/color"
 	"testing"
 
 	"github.com/stretchr/testify/suite"
@@ -20,12 +21,13 @@ func Test_Wire(t *testing.T) {
 	suite.Run(t, new(wireTest))
 }
 
-func (m *wireTest) Test_NewLED() {
+func (m *wireTest) Test_NewWire() {
 	expectedW := WireConfig{
 		StartX: 0,
 		StartY: 0,
 		EndX:   0,
 		EndY:   10,
+		Colour: color.Black,
 	}
 	w := NewWire(0, 0, 0, 10)
 	m.Equal(expectedW, w)
@@ -78,4 +80,9 @@ func (m *wireTest) Test_GetCoordinates_Error() {
 	cords, err := w.GetCoordinates()
 	m.EqualError(err, "only straight lines, horizontal or vertical")
 	m.Equal(expectedCords, cords)
+}
+
+func (m *wireTest) Test_GetColour() {
+	w := NewWire(0, 0, 10, 1)
+	m.Equal(color.Black, w.GetColour())
 }

@@ -36,6 +36,7 @@ var ledPixels = [][]int{
 type LEDConfig struct {
 	StartX, StartY int
 	LedPixels      [][]int
+	Colour         color.Color
 }
 
 // NewLED returns a LED config starting from specified x,y
@@ -44,7 +45,13 @@ func NewLED(startX, startY int) LEDConfig {
 		StartX:    startX,
 		StartY:    startY,
 		LedPixels: ledPixels,
+		Colour:    color.Black,
 	}
+}
+
+// GetColour gets the colour to render the element in
+func (l *LEDConfig) GetColour() color.Color {
+	return l.Colour
 }
 
 // GetCoordinates calculates cords to draw onto a canvas

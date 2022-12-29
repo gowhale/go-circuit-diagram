@@ -1,11 +1,15 @@
 package components
 
-import "fmt"
+import (
+	"fmt"
+	"image/color"
+)
 
 // WireConfig is configuration for a line on the canvas
 type WireConfig struct {
 	StartX, StartY int
 	EndX, EndY     int
+	Colour         color.Color
 }
 
 // NewWire returns a Wire config starting from specified x,y and ending at x,y
@@ -16,7 +20,13 @@ func NewWire(startX, startY, endX, endY int) WireConfig {
 		StartY: startY,
 		EndX:   endX,
 		EndY:   endY,
+		Colour: color.Black,
 	}
+}
+
+// GetColour gets the colour to render the element in
+func (w *WireConfig) GetColour() color.Color {
+	return w.Colour
 }
 
 // GetCoordinates calculates cords to draw onto a canvas
