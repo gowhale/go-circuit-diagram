@@ -59,7 +59,7 @@ func (l *LEDConfig) GetCoordinates() ([][]int, error) {
 	for x := range l.LedPixels[0] {
 		for y := range l.LedPixels {
 			if l.LedPixels[y][x] == pixelFill {
-				cordsToDraw = append(cordsToDraw, []int{x + l.startCoord.X(), y + l.startCoord.Y()})
+				cordsToDraw = append(cordsToDraw, []int{x + l.startCoord.GetX(), y + l.startCoord.GetY()})
 			}
 		}
 	}
@@ -68,12 +68,12 @@ func (l *LEDConfig) GetCoordinates() ([][]int, error) {
 
 // GetCathode gets the LED's cathode coord
 func (l *LEDConfig) GetCathode() common.Coordinate {
-	return common.NewCord(l.startCoord.X()+5, l.startCoord.Y()-1)
+	return common.NewCord(l.startCoord.GetX()+5, l.startCoord.GetY())
 }
 
 // GetAnode gets the LED's anode coord
 func (l *LEDConfig) GetAnode() common.Coordinate {
-	return common.NewCord(l.startCoord.X()+5, l.startCoord.Y()+len(ledPixels))
+	return common.NewCord(l.startCoord.GetX()+5, l.startCoord.GetY()+len(ledPixels))
 }
 
 func validatePixelArray(pixelArray [][]int) error {

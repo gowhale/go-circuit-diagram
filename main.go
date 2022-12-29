@@ -27,6 +27,8 @@ func main() {
 	board.AddElement(&led3)
 	led4 := components.NewLED(common.NewCord(5, 75))
 	board.AddElement(&led4)
+	led5 := components.NewLED(common.NewCord(83, 5))
+	board.AddElement(&led5)
 
 	// Add some wires
 	wire := components.NewWire(common.NewCord(30, 20), common.NewCord(30, 50))
@@ -39,6 +41,10 @@ func main() {
 	board.AddElement(&wire4)
 	wire5 := components.NewWire(common.NewCord(10, 65), common.NewCord(10, 75))
 	board.AddElement(&wire5)
+	wire6 := components.NewWire(common.NewCord(led3.GetCathode().X, led5.GetAnode().Y), led3.GetCathode())
+	board.AddElement(&wire6)
+	wire7 := components.NewWire(led5.GetAnode(), common.NewCord(led3.GetCathode().X, led5.GetAnode().Y))
+	board.AddElement(&wire7)
 
 	// Add some GPIOS
 	gpio1 := components.NewGPIO(common.NewCord(30, 3))
@@ -50,11 +56,8 @@ func main() {
 	gpio3 := components.NewGPIO(common.NewCord(10, 92))
 	board.AddElement(&gpio3)
 
-	gpio4 := components.NewGPIO(led3.GetCathode())
+	gpio4 := components.NewGPIO(led5.GetCathode())
 	board.AddElement(&gpio4)
-
-	gpio5 := components.NewGPIO(led3.GetAnode())
-	board.AddElement(&gpio5)
 
 	err = board.Draw(realOS)
 	if err != nil {

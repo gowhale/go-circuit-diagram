@@ -27,13 +27,13 @@ func (g *GPIOConfig) GetColour() color.Color {
 // GetCoordinates calculates cords to draw onto a canvas
 func (g *GPIOConfig) GetCoordinates() ([][]int, error) {
 	cords := [][]int{}
-	cords = append(cords, []int{g.cord.X() - 1, g.cord.Y()})
-	cords = append(cords, []int{g.cord.X() + 1, g.cord.Y()})
-	cords = append(cords, []int{g.cord.X() + 1, g.cord.Y() + 1})
-	cords = append(cords, []int{g.cord.X() - 1, g.cord.Y() + 1})
-	cords = append(cords, []int{g.cord.X(), g.cord.Y() - 1})
-	cords = append(cords, []int{g.cord.X(), g.cord.Y() + 1})
-	cords = append(cords, []int{g.cord.X() - 1, g.cord.Y() - 1})
-	cords = append(cords, []int{g.cord.X() + 1, g.cord.Y() - 1})
+	cords = append(cords, []int{g.cord.GetX() - 1, g.cord.GetY()})
+	cords = append(cords, []int{g.cord.GetX() + 1, g.cord.GetY()})
+	cords = append(cords, []int{g.cord.GetX() + 1, g.cord.GetY() + 1})
+	cords = append(cords, []int{g.cord.GetX() - 1, g.cord.GetY() + 1})
+	cords = append(cords, []int{g.cord.GetX(), g.cord.GetY() - 1})
+	cords = append(cords, []int{g.cord.GetX(), g.cord.GetY() + 1})
+	cords = append(cords, []int{g.cord.GetX() - 1, g.cord.GetY() - 1})
+	cords = append(cords, []int{g.cord.GetX() + 1, g.cord.GetY() - 1})
 	return cords, nil
 }

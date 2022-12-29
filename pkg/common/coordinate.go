@@ -2,24 +2,24 @@ package common
 
 // Coordinate represents a point on board x,y
 type Coordinate struct {
-	x int
-	y int
+	X int
+	Y int
 }
 
 // NewCord returns a coordinate struct
 func NewCord(x, y int) Coordinate {
 	return Coordinate{
-		x: x,
-		y: y,
+		X: x,
+		Y: y,
 	}
 }
 
-// X gets the x part of the coord
-func (c *Coordinate) X() int {
-	return c.x
+// GetX gets the x part of the coord
+func (c *Coordinate) GetX() int {
+	return c.X
 }
 
-// Y gets the y part of the coord
-func (c *Coordinate) Y() int {
-	return c.y
+// GetY gets the y part of the coord
+func (c *Coordinate) GetY() int {
+	return c.Y
 }

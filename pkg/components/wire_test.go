@@ -44,6 +44,7 @@ func (m *wireTest) Test_GetCoordinates_Vertical_Pass() {
 		{0, 7},
 		{0, 8},
 		{0, 9},
+		{0, 10},
 	}
 
 	w := NewWire(common.NewCord(0, 0), common.NewCord(0, 10))
@@ -64,6 +65,7 @@ func (m *wireTest) Test_GetCoordinates_Horizontal_Pass() {
 		{7, 0},
 		{8, 0},
 		{9, 0},
+		{10, 0},
 	}
 
 	w := NewWire(common.NewCord(0, 0), common.NewCord(10, 0))

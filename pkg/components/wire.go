@@ -28,25 +28,48 @@ func (w *WireConfig) GetColour() color.Color {
 	return w.Colour
 }
 
+func verticalCoords(w *WireConfig) [][]int {
+	lineCords := [][]int{}
+
+	for y := w.startCoord.GetY(); y < w.endCoord.GetY()+1; y++ {
+		lineCords = append(lineCords, []int{w.startCoord.GetX(), y})
+	}
+	if len(lineCords) == 0 {
+		for y := w.endCoord.GetY(); y < w.startCoord.GetY()+1; y++ {
+			lineCords = append(lineCords, []int{w.startCoord.GetX(), y})
+		}
+	}
+
+	return lineCords
+}
+
+func horizontal(w *WireConfig) [][]int {
+	lineCords := [][]int{}
+
+	for x := w.startCoord.GetX(); x < w.endCoord.GetX()+1; x++ {
+		lineCords = append(lineCords, []int{x, w.startCoord.GetY()})
+	}
+	if len(lineCords) == 0 {
+		for x := w.endCoord.GetX(); x < w.startCoord.GetX()+1; x++ {
+			lineCords = append(lineCords, []int{x, w.startCoord.GetY()})
+		}
+	}
+
+	return lineCords
+}
+
 // GetCoordinates calculates cords to draw onto a canvas
 func (w *WireConfig) GetCoordinates() ([][]int, error) {
-	if w.startCoord.X() != w.endCoord.X() && w.startCoord.Y() != w.endCoord.Y() {
+	if w.startCoord.GetX() != w.endCoord.GetX() && w.startCoord.GetY() != w.endCoord.GetY() {
 		return [][]int{}, fmt.Errorf("only straight lines, horizontal or vertical")
 	}
 
-	lineCords := [][]int{}
-
 	// vertical line
-	if w.startCoord.X() == w.endCoord.X() {
-		for y := w.startCoord.Y(); y < w.endCoord.Y(); y++ {
-			lineCords = append(lineCords, []int{w.startCoord.X(), y})
-		}
-		return lineCords, nil
+	if w.startCoord.GetX() == w.endCoord.GetX() {
+		return verticalCoords(w), nil
 	}
 
 	// horizontal line
-	for x := w.startCoord.X(); x < w.endCoord.X(); x++ {
-		lineCords = append(lineCords, []int{x, w.startCoord.Y()})
-	}
-	return lineCords, nil
+
+	return horizontal(w), nil
 }
