@@ -7,6 +7,10 @@ So far I the main prog creates a a PNG of an LED which you can find in the image
 
 It also creates a board with multiple LED's painted onto it which you can find in the images folder.
 
+### Example:
+
+<img src="https://user-images.githubusercontent.com/32711718/210010156-8bd088ab-5a37-44af-a515-b61c32f77eb8.png" alt="" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="400" height="400" />
+
 ## Actions created by this template:
 
 ### Testing
