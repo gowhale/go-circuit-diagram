@@ -14,9 +14,7 @@ type wireTest struct {
 	suite.Suite
 }
 
-func (m *wireTest) SetupTest() {
-
-}
+func (*wireTest) SetupTest() {}
 
 func Test_Wire(t *testing.T) {
 	suite.Run(t, new(wireTest))
