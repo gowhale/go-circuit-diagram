@@ -12,10 +12,14 @@ const (
 	pixelFill   = 1
 	ledFileName = "images/led.png"
 
+	// North Direction which the LED can point
 	North = "N"
-	East  = "E"
+	// East Direction which the LED can point
+	East = "E"
+	// South Direction which the LED can point
 	South = "S"
-	West  = "W"
+	// West Direction which the LED can point
+	West = "W"
 )
 
 var ledPixels = [][]int{
