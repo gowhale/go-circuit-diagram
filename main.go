@@ -39,11 +39,23 @@ func main() {
 		log.Fatal(err)
 	}
 	board.AddElement(&led4)
-	led5, err := components.NewLED(common.NewCord(83, 5), components.North)
+	led5, err := components.NewLED(common.NewCord(83, 5), components.South)
 	if err != nil {
 		log.Fatal(err)
 	}
 	board.AddElement(&led5)
+
+	led6, err := components.NewLED(common.NewCord(45, 25), components.East)
+	if err != nil {
+		log.Fatal(err)
+	}
+	board.AddElement(&led6)
+
+	led7, err := components.NewLED(common.NewCord(45, 75), components.West)
+	if err != nil {
+		log.Fatal(err)
+	}
+	board.AddElement(&led7)
 
 	// Add some wires
 	wire := components.NewWire(common.NewCord(30, 20), common.NewCord(30, 50))

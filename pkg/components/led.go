@@ -56,6 +56,40 @@ type LEDConfig struct {
 	Direction  string
 }
 
+func transformPixels(pixels [][]int, direction string) [][]int {
+	newPixels := make([][]int, len(pixels))
+	copy(newPixels, pixels)
+	if direction == North {
+		return pixels
+	}
+	if direction == South {
+		for i, j := 0, len(newPixels)-1; i < j; i, j = i+1, j-1 {
+			newPixels[i], newPixels[j] = newPixels[j], newPixels[i]
+		}
+		return newPixels
+	}
+
+	newPixels = [][]int{}
+	for range pixels[0] {
+		newPixels = append(newPixels, []int{})
+	}
+	for _, row := range pixels {
+		for k, pixel := range row {
+			newPixels[k] = append(newPixels[k], pixel)
+		}
+	}
+	if direction == West {
+		return newPixels
+	} else {
+		for _, row := range newPixels {
+			for i, j := 0, len(row)-1; i < j; i, j = i+1, j-1 {
+				row[i], row[j] = row[j], row[i]
+			}
+		}
+		return newPixels
+	}
+}
+
 // NewLED returns a LED config starting from specified x,y
 func NewLED(startCoord common.Coordinate, direction string) (LEDConfig, error) {
 	if _, ok := directions[direction]; !ok {
@@ -63,7 +97,7 @@ func NewLED(startCoord common.Coordinate, direction string) (LEDConfig, error) {
 	}
 	return LEDConfig{
 		startCoord: startCoord,
-		LedPixels:  ledPixels,
+		LedPixels:  transformPixels(ledPixels, direction),
 		Colour:     color.Black,
 		Direction:  direction,
 	}, nil
