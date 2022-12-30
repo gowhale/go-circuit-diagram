@@ -9,8 +9,7 @@ It also creates a board with multiple LED's painted onto it which you can find i
 
 ### Example:
 
-![image](https://user-images.githubusercontent.com/32711718/210021111-79b7959b-dc31-44e1-b693-61cbe5d0392f.png)
-
+![image](https://user-images.githubusercontent.com/32711718/210105762-90de82bb-61ad-464f-ab40-6f26e62f6028.png)
 ## Actions created by this template:
 
 ### Testing
