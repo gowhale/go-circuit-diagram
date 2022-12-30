@@ -57,6 +57,12 @@ func main() {
 	}
 	board.AddElement(&led7)
 
+	led8, err := components.NewLED(common.NewCord(40, 50), components.North)
+	if err != nil {
+		log.Fatal(err)
+	}
+	board.AddElement(&led8)
+
 	// Add some wires
 	wire := components.NewWire(common.NewCord(30, 20), common.NewCord(30, 50))
 	board.AddElement(&wire)
