@@ -23,6 +23,7 @@ const (
 var excludedPkgs = map[string]bool{
 	"go-circuit-diagram":           true,
 	"go-circuit-diagram/pkg/common": true,
+	"go-circuit-diagram/cmd/anode-matrix": true,
 }
 
 func main() {

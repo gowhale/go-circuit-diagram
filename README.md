@@ -7,9 +7,16 @@ So far I the main prog creates a a PNG of an LED which you can find in the image
 
 It also creates a board with multiple LED's painted onto it which you can find in the images folder.
 
-### Example:
+### Examples:
 
-![image](https://user-images.githubusercontent.com/32711718/210105762-90de82bb-61ad-464f-ab40-6f26e62f6028.png)
+The code in 'main.go' generates the following diagram. Showing how LED's, GPIO pins, wires and connectors can be added: 
+
+![image](https://user-images.githubusercontent.com/32711718/210115656-835318be-bd8f-4699-ba2f-fde8f409bf74.png)
+
+The code in './cmd/anode-matrix/main.go' generates the following diagram. Showing how an LED matrix can be created using custom rows and cols:
+
+![image](https://user-images.githubusercontent.com/32711718/210115563-3ab9d8dd-829b-45d2-ad1d-f91ea0a70f80.png)
+
 ## Actions created by this template:
 
 ### Testing
