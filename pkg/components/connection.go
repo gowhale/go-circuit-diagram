@@ -5,13 +5,13 @@ import (
 	"image/color"
 )
 
-// ConnectionConfig is configuration for a line on the canvas
+// ConnectionConfig represents two components attached
 type ConnectionConfig struct {
 	cord   common.Coordinate
 	Colour color.Color
 }
 
-// NewGPIO returns a GPIO config starting at specified x,y
+// NewConnection returns a ConnectionConfig at specified x,y
 func NewConnection(cord common.Coordinate) ConnectionConfig {
 	return ConnectionConfig{
 		cord:   cord,
