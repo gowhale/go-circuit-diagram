@@ -19,15 +19,15 @@ func main() {
 	board := canvas.NewBoard("test", 100, 100, 10)
 
 	// Adding some LEDS
-	led1 := components.NewLED(common.NewCord(5, 5))
+	led1, err := components.NewLED(common.NewCord(5, 5), components.North)
 	board.AddElement(&led1)
-	led2 := components.NewLED(common.NewCord(25, 5))
+	led2, err := components.NewLED(common.NewCord(25, 5), components.North)
 	board.AddElement(&led2)
-	led3 := components.NewLED(common.NewCord(65, 50))
+	led3, err := components.NewLED(common.NewCord(65, 50), components.North)
 	board.AddElement(&led3)
-	led4 := components.NewLED(common.NewCord(5, 75))
+	led4, err := components.NewLED(common.NewCord(5, 75), components.North)
 	board.AddElement(&led4)
-	led5 := components.NewLED(common.NewCord(83, 5))
+	led5, err := components.NewLED(common.NewCord(83, 5), components.North)
 	board.AddElement(&led5)
 
 	// Add some wires

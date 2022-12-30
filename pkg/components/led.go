@@ -11,6 +11,11 @@ const (
 	pixelEmpt   = 0
 	pixelFill   = 1
 	ledFileName = "images/led.png"
+
+	North = "N"
+	East  = "E"
+	South = "S"
+	West  = "W"
 )
 
 var ledPixels = [][]int{
@@ -32,20 +37,32 @@ var ledPixels = [][]int{
 	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
 }
 
+var directions = map[string]bool{
+	North: true,
+	East:  true,
+	South: true,
+	West:  true,
+}
+
 // LEDConfig is configuration for an LED component
 type LEDConfig struct {
 	startCoord common.Coordinate
 	LedPixels  [][]int
 	Colour     color.Color
+	Direction  string
 }
 
 // NewLED returns a LED config starting from specified x,y
-func NewLED(startCoord common.Coordinate) LEDConfig {
+func NewLED(startCoord common.Coordinate, direction string) (LEDConfig, error) {
+	if _, ok := directions[direction]; !ok {
+		return LEDConfig{}, fmt.Errorf("direction not valid")
+	}
 	return LEDConfig{
 		startCoord: startCoord,
 		LedPixels:  ledPixels,
 		Colour:     color.Black,
-	}
+		Direction:  direction,
+	}, nil
 }
 
 // GetColour gets the colour to render the element in
