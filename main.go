@@ -86,6 +86,18 @@ func main() {
 	gpio4 := components.NewGPIO(led5.GetCathode())
 	board.AddElement(&gpio4)
 
+	gpio5 := components.NewGPIO(led7.GetCathode())
+	board.AddElement(&gpio5)
+
+	gpio6 := components.NewGPIO(led7.GetAnode())
+	board.AddElement(&gpio6)
+	
+	gpio7 := components.NewGPIO(led6.GetCathode())
+	board.AddElement(&gpio7)
+
+	gpio8 := components.NewGPIO(led6.GetAnode())
+	board.AddElement(&gpio8)
+
 	err = board.Draw(realOS)
 	if err != nil {
 		log.Fatalln(err)
