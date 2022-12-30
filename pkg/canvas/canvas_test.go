@@ -25,7 +25,8 @@ type mainTest struct {
 
 func (m *mainTest) SetupTest() {
 	m.mockOS = new(common.MockOS)
-	m.testLed = components.NewLED(common.NewCord(0, 0))
+	l, _ := components.NewLED(common.NewCord(0, 0), components.North)
+	m.testLed = l
 }
 
 func TestMainTest(t *testing.T) {
@@ -84,8 +85,8 @@ func (m *mainTest) Test_enlargeCoordintes_Double_OnePixel() {
 }
 
 func (m *mainTest) Test_enlargeCoordintes_Double_TwoPixel() {
-	testCoords := [][]int{{0, 0},{1, 1}}
-	expectedCoords := [][]int{{0, 0}, {0, 1}, {1, 0}, {1, 1},{2, 2}, {2, 3}, {3, 2}, {3, 3},}
+	testCoords := [][]int{{0, 0}, {1, 1}}
+	expectedCoords := [][]int{{0, 0}, {0, 1}, {1, 0}, {1, 1}, {2, 2}, {2, 3}, {3, 2}, {3, 3}}
 	result := enlargeCoordintes(testCoords, 2)
 	m.Equal(expectedCoords, result)
 }

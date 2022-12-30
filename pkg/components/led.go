@@ -8,28 +8,23 @@ import (
 )
 
 const (
-	pixelEmpt   = 0
-	pixelFill   = 1
 	ledFileName = "images/led.png"
+
+	// North Direction which the LED can point
+	North = "N"
+	// East Direction which the LED can point
+	East = "E"
+	// South Direction which the LED can point
+	South = "S"
+	// West Direction which the LED can point
+	West = "W"
 )
 
-var ledPixels = [][]int{
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelFill, pixelFill},
-	{pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelEmpt, pixelEmpt, pixelFill, pixelFill},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelFill},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
-	{pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelFill, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt, pixelEmpt},
+var directions = map[string]bool{
+	North: true,
+	East:  true,
+	South: true,
+	West:  true,
 }
 
 // LEDConfig is configuration for an LED component
@@ -37,15 +32,61 @@ type LEDConfig struct {
 	startCoord common.Coordinate
 	LedPixels  [][]int
 	Colour     color.Color
+	Direction  string
+}
+
+func reverse1DSlice(arr []int) {
+	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
+		arr[i], arr[j] = arr[j], arr[i]
+	}
+}
+
+func reverse2DSlice(arr [][]int) {
+	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
+		arr[i], arr[j] = arr[j], arr[i]
+	}
+}
+
+func transformPixels(pixels [][]int, direction string) [][]int {
+	newPixels := make([][]int, len(pixels))
+	copy(newPixels, pixels)
+	if direction == North {
+		return pixels
+	}
+	if direction == South {
+		reverse2DSlice(newPixels)
+		return newPixels
+	}
+
+	newPixels = [][]int{}
+	for range pixels[0] {
+		newPixels = append(newPixels, []int{})
+	}
+	for _, row := range pixels {
+		for k, pixel := range row {
+			newPixels[k] = append(newPixels[k], pixel)
+		}
+	}
+	if direction == West {
+		return newPixels
+	}
+	for _, row := range newPixels {
+		reverse1DSlice(row)
+	}
+	return newPixels
 }
 
 // NewLED returns a LED config starting from specified x,y
-func NewLED(startCoord common.Coordinate) LEDConfig {
+func NewLED(startCoord common.Coordinate, direction string) (LEDConfig, error) {
+	if _, ok := directions[direction]; !ok {
+		return LEDConfig{}, fmt.Errorf("direction not valid")
+	}
 	return LEDConfig{
 		startCoord: startCoord,
-		LedPixels:  ledPixels,
+		LedPixels:  transformPixels(ledPixels, direction),
 		Colour:     color.Black,
-	}
+		Direction:  direction,
+	}, nil
 }
 
 // GetColour gets the colour to render the element in
@@ -68,12 +109,30 @@ func (l *LEDConfig) GetCoordinates() ([][]int, error) {
 
 // GetCathode gets the LED's cathode coord
 func (l *LEDConfig) GetCathode() common.Coordinate {
-	return common.NewCord(l.startCoord.GetX()+5, l.startCoord.GetY())
+	if l.Direction == North {
+		return common.NewCord(l.startCoord.GetX()+5, l.startCoord.GetY())
+	}
+	if l.Direction == East {
+		return common.NewCord(l.startCoord.GetX()-1, l.startCoord.GetY()+5)
+	}
+	if l.Direction == South {
+		return common.NewCord(l.startCoord.GetX()+5, l.startCoord.GetY()+len(ledPixels))
+	}
+	return common.NewCord(l.startCoord.GetX()+len(ledPixels), l.startCoord.GetY()+5)
 }
 
 // GetAnode gets the LED's anode coord
 func (l *LEDConfig) GetAnode() common.Coordinate {
-	return common.NewCord(l.startCoord.GetX()+5, l.startCoord.GetY()+len(ledPixels))
+	if l.Direction == North {
+		return common.NewCord(l.startCoord.GetX()+5, l.startCoord.GetY()+len(ledPixels))
+	}
+	if l.Direction == East {
+		return common.NewCord(l.startCoord.GetX()+len(ledPixels), l.startCoord.GetY()+5)
+	}
+	if l.Direction == South {
+		return common.NewCord(l.startCoord.GetX()+5, l.startCoord.GetY())
+	}
+	return common.NewCord(l.startCoord.GetX()-1, l.startCoord.GetY()+5)
 }
 
 func validatePixelArray(pixelArray [][]int) error {

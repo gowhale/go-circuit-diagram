@@ -19,16 +19,49 @@ func main() {
 	board := canvas.NewBoard("test", 100, 100, 10)
 
 	// Adding some LEDS
-	led1 := components.NewLED(common.NewCord(5, 5))
+	led1, err := components.NewLED(common.NewCord(5, 5), components.North)
+	if err != nil {
+		log.Fatal(err)
+	}
 	board.AddElement(&led1)
-	led2 := components.NewLED(common.NewCord(25, 5))
+	led2, err := components.NewLED(common.NewCord(25, 5), components.North)
+	if err != nil {
+		log.Fatal(err)
+	}
 	board.AddElement(&led2)
-	led3 := components.NewLED(common.NewCord(65, 50))
+	led3, err := components.NewLED(common.NewCord(65, 50), components.North)
+	if err != nil {
+		log.Fatal(err)
+	}
 	board.AddElement(&led3)
-	led4 := components.NewLED(common.NewCord(5, 75))
+	led4, err := components.NewLED(common.NewCord(5, 75), components.North)
+	if err != nil {
+		log.Fatal(err)
+	}
 	board.AddElement(&led4)
-	led5 := components.NewLED(common.NewCord(83, 5))
+	led5, err := components.NewLED(common.NewCord(83, 5), components.South)
+	if err != nil {
+		log.Fatal(err)
+	}
 	board.AddElement(&led5)
+
+	led6, err := components.NewLED(common.NewCord(45, 25), components.East)
+	if err != nil {
+		log.Fatal(err)
+	}
+	board.AddElement(&led6)
+
+	led7, err := components.NewLED(common.NewCord(45, 75), components.West)
+	if err != nil {
+		log.Fatal(err)
+	}
+	board.AddElement(&led7)
+
+	led8, err := components.NewLED(common.NewCord(40, 50), components.North)
+	if err != nil {
+		log.Fatal(err)
+	}
+	board.AddElement(&led8)
 
 	// Add some wires
 	wire := components.NewWire(common.NewCord(30, 20), common.NewCord(30, 50))
@@ -58,6 +91,18 @@ func main() {
 
 	gpio4 := components.NewGPIO(led5.GetCathode())
 	board.AddElement(&gpio4)
+
+	gpio5 := components.NewGPIO(led7.GetCathode())
+	board.AddElement(&gpio5)
+
+	gpio6 := components.NewGPIO(led7.GetAnode())
+	board.AddElement(&gpio6)
+	
+	gpio7 := components.NewGPIO(led6.GetCathode())
+	board.AddElement(&gpio7)
+
+	gpio8 := components.NewGPIO(led6.GetAnode())
+	board.AddElement(&gpio8)
 
 	err = board.Draw(realOS)
 	if err != nil {
