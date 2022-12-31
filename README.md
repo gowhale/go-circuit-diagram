@@ -15,7 +15,7 @@ The code in 'main.go' generates the following diagram. Showing how LED's, GPIO p
 
 The code in './cmd/anode-matrix/main.go' generates the following diagram. Showing how an LED matrix can be created using custom rows and cols:
 
-![image](https://user-images.githubusercontent.com/32711718/210115563-3ab9d8dd-829b-45d2-ad1d-f91ea0a70f80.png)
+![image](https://user-images.githubusercontent.com/32711718/210153278-a90e97a5-0527-4db2-8e4c-f0a49eacb67d.png)
 
 ## Actions created by this template:
 
