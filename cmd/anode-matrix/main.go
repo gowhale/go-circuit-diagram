@@ -11,7 +11,9 @@ import (
 )
 
 func main() {
-	createAnodeMatrix()
+	rowPins := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	colPins := []int{9, 10, 11, 12, 14, 15, 16}
+	CreateAnodeMatrix(rowPins, colPins)
 }
 
 func addLEDS(board *canvas.Board, ledMatrix [][]components.LEDConfig, cols, rows int) {
@@ -31,7 +33,7 @@ func addLEDS(board *canvas.Board, ledMatrix [][]components.LEDConfig, cols, rows
 	}
 }
 
-func addVerticalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig, cols, rows int) {
+func addVerticalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig, cols, rows int, pins []int) {
 	for i := 0; i < cols; i++ {
 		x := ledMatrix[0][i].GetAnode().X + 15
 		startY := ledMatrix[0][i].GetAnode().Y - 30
@@ -39,12 +41,12 @@ func addVerticalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig, c
 		wire := components.NewWire(common.NewCord(x, startY), common.NewCord(x, endY))
 		board.AddElement(&wire)
 
-		label := components.NewLabel(common.NewCord(x, ledMatrix[0][i].GetAnode().Y-40), fmt.Sprintf("%d%d", 9-i, i))
+		label := components.NewLabel(common.NewCord(x, ledMatrix[0][i].GetAnode().Y-40), fmt.Sprintf("%d",pins[i]))
 		board.AddElement(&label)
 	}
 }
 
-func addHorizontalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig, cols, rows int) {
+func addHorizontalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig, cols, rows int, pins []int) {
 	for i := 0; i < rows; i++ {
 		y := ledMatrix[i][0].GetAnode().Y
 		startX := ledMatrix[i][0].GetAnode().X - 20
@@ -52,18 +54,20 @@ func addHorizontalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig,
 		wire := components.NewWire(common.NewCord(startX, y), common.NewCord(endX, y))
 		board.AddElement(&wire)
 
-		label := components.NewLabel(common.NewCord(startX-10, y), fmt.Sprintf("%d%d", 9-i, i))
+		pinAsString := fmt.Sprintf("%d", pins[i])
+		log.Println(pinAsString)
+		label := components.NewLabel(common.NewCord(startX-10, y), pinAsString)
 		board.AddElement(&label)
 	}
 }
 
-func createAnodeMatrix() {
+func CreateAnodeMatrix(rowPins, colPins []int) {
 	realOS := &common.OSReal{}
 
 	board := canvas.NewBoard("anode-matrix-16", 300, 300, 10)
 
-	cols := 8
-	rows := 8
+	cols := len(rowPins)
+	rows := len(colPins)
 
 	ledMatrix := make([][]components.LEDConfig, rows)
 	for i := range ledMatrix {
@@ -84,9 +88,9 @@ func createAnodeMatrix() {
 		}
 	}
 
-	addHorizontalWires(&board, ledMatrix, cols, rows)
+	addHorizontalWires(&board, ledMatrix, cols, rows, colPins)
 
-	addVerticalWires(&board, ledMatrix, cols, rows)
+	addVerticalWires(&board, ledMatrix, cols, rows, rowPins)
 
 	// horzonal gpio
 	for _, led := range ledMatrix[0] {

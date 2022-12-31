@@ -6,6 +6,8 @@ github.com/gowhale/go-test-data v1.0.0 h1:kVO9OooDavGMfGN7RPHSX+iV445AjsqNGDkYLg
 github.com/gowhale/go-test-data v1.0.0/go.mod h1:cTBXELwnLcorLU3CbtRxETDpBVJL251XyjTyDyGJf3I=
 github.com/gowhale/led-matrix-golang v1.0.2-0.20221231161538-dc754bb2505c h1:5bIO7KoeYVLRYw6fcgkZpjrA05/4Oq1/3q4FCcw9Qts=
 github.com/gowhale/led-matrix-golang v1.0.2-0.20221231161538-dc754bb2505c/go.mod h1:3rWmjvsA6cyqEca+1kUO9COFNtO/2jZHtl9BoHaqdzo=
+github.com/gowhale/led-matrix-golang v1.0.2 h1:hEdJna5CEmOlKUA3vwIfAK4SLvtqX6HDw/SjMymkMfw=
+github.com/gowhale/led-matrix-golang v1.0.2/go.mod h1:3rWmjvsA6cyqEca+1kUO9COFNtO/2jZHtl9BoHaqdzo=
 github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
 github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
 github.com/kr/text v0.2.0 h1:5Nx0Ya0ZqY2ygV366QzturHI13Jq95ApcVaJBhpS+AY=
