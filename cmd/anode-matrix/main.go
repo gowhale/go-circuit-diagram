@@ -13,7 +13,7 @@ import (
 func main() {
 	rowPins := []int{1, 2, 3, 4, 5, 6, 7, 8}
 	colPins := []int{9, 10, 11, 12, 14, 15, 16}
-	CreateAnodeMatrix(rowPins, colPins)
+	CreateAnodeMatrix(rowPins, colPins, "8-8-pins")
 }
 
 func addLEDS(board *canvas.Board, ledMatrix [][]components.LEDConfig, cols, rows int) {
@@ -62,10 +62,10 @@ func addHorizontalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig,
 }
 
 // CreateAnodeMatrix will create a matrix with specified pins
-func CreateAnodeMatrix(rowPins, colPins []int) {
+func CreateAnodeMatrix(rowPins, colPins []int, imageName string) {
 	realOS := &common.OSReal{}
 
-	board := canvas.NewBoard("anode-matrix-16", 300, 300, 10)
+	board := canvas.NewBoard(imageName, 300, 300, 10)
 
 	cols := len(rowPins)
 	rows := len(colPins)
