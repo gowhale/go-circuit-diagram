@@ -41,7 +41,7 @@ func addVerticalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig, c
 		wire := components.NewWire(common.NewCord(x, startY), common.NewCord(x, endY))
 		board.AddElement(&wire)
 
-		label := components.NewLabel(common.NewCord(x, ledMatrix[0][i].GetAnode().Y-40), fmt.Sprintf("%d",pins[i]))
+		label := components.NewLabel(common.NewCord(x, ledMatrix[0][i].GetAnode().Y-40), fmt.Sprintf("%d", pins[i]))
 		board.AddElement(&label)
 	}
 }
@@ -61,6 +61,7 @@ func addHorizontalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig,
 	}
 }
 
+// CreateAnodeMatrix will create a matrix with specified pins
 func CreateAnodeMatrix(rowPins, colPins []int) {
 	realOS := &common.OSReal{}
 
