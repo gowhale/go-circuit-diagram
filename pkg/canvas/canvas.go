@@ -3,11 +3,12 @@ package canvas
 
 import (
 	"fmt"
-	"go-circuit-diagram/pkg/common"
-	"go-circuit-diagram/pkg/components"
 	"image"
 	"image/color"
 	"log"
+
+	"github.com/gowhale/go-circuit-diagram/pkg/common"
+	"github.com/gowhale/go-circuit-diagram/pkg/components"
 )
 
 // Board represents a board to add components to

@@ -21,9 +21,9 @@ const (
 )
 
 var excludedPkgs = map[string]bool{
-	"go-circuit-diagram":           true,
-	"go-circuit-diagram/pkg/common": true,
-	"go-circuit-diagram/cmd/anode-matrix": true,
+	"github.com/gowhale/go-circuit-diagram":                  true,
+	"github.com/gowhale/go-circuit-diagram/pkg/common":       true,
+	"github.com/gowhale/go-circuit-diagram/cmd/anode-matrix": true,
 }
 
 func main() {

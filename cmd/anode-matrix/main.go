@@ -3,10 +3,11 @@ package main
 
 import (
 	"fmt"
-	"go-circuit-diagram/pkg/canvas"
-	"go-circuit-diagram/pkg/common"
-	"go-circuit-diagram/pkg/components"
 	"log"
+
+	"github.com/gowhale/go-circuit-diagram/pkg/canvas"
+	"github.com/gowhale/go-circuit-diagram/pkg/common"
+	"github.com/gowhale/go-circuit-diagram/pkg/components"
 )
 
 func main() {

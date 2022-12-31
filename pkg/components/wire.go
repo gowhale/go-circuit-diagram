@@ -2,8 +2,9 @@ package components
 
 import (
 	"fmt"
-	"go-circuit-diagram/pkg/common"
 	"image/color"
+
+	"github.com/gowhale/go-circuit-diagram/pkg/common"
 )
 
 // WireConfig is configuration for a line on the canvas

@@ -1,8 +1,9 @@
 package components
 
 import (
-	"go-circuit-diagram/pkg/common"
 	"image/color"
+
+	"github.com/gowhale/go-circuit-diagram/pkg/common"
 
 	"github.com/gowhale/led-matrix-golang/pkg/matrix"
 )

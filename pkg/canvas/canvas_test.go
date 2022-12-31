@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"go-circuit-diagram/pkg/common"
-	"go-circuit-diagram/pkg/components"
+	"github.com/gowhale/go-circuit-diagram/pkg/common"
+	"github.com/gowhale/go-circuit-diagram/pkg/components"
 
 	fruit "github.com/gowhale/go-test-data/pkg/fruits"
 	"github.com/stretchr/testify/mock"
