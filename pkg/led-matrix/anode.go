@@ -54,10 +54,38 @@ func addHorizontalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig,
 	}
 }
 
-// CreateAnodeMatrix generates an image for an led matrix
-func CreateAnodeMatrix(rowPins, colPins []int, imageName string) {
-	realOS := &common.OSReal{}
+func connectLEDToVerticalWire(board *canvas.Board, ledMatrix [][]components.LEDConfig, cols, rows int, pins []int) {
+	for y := range ledMatrix {
+		for x := range ledMatrix[y] {
+			top := ledMatrix[y][x].GetCathode()
+			topLED := common.NewCord(top.X+15, top.Y)
+			wire := components.NewWire(top, topLED)
+			board.AddElement(&wire)
 
+			connection := components.NewConnection(topLED)
+			board.AddElement(&connection)
+		}
+	}
+}
+
+func addVerticalGPIOs(board *canvas.Board, ledMatrix [][]components.LEDConfig) {
+	for _, led := range ledMatrix {
+		leftGPIO := common.NewCord(led[0].GetAnode().X-20, led[0].GetAnode().Y)
+		newGPIO := components.NewGPIO(leftGPIO)
+		board.AddElement(&newGPIO)
+	}
+}
+
+func addHorizontalGPIOs(board *canvas.Board, ledMatrix [][]components.LEDConfig) {
+	for _, led := range ledMatrix {
+		leftGPIO := common.NewCord(led[0].GetAnode().X-20, led[0].GetAnode().Y)
+		newGPIO := components.NewGPIO(leftGPIO)
+		board.AddElement(&newGPIO)
+	}
+}
+
+// CreateAnodeMatrix generates an image for an led matrix
+func CreateAnodeMatrix(o common.OS, rowPins, colPins []int, imageName string) error {
 	board := canvas.NewBoard(imageName, 40+(len(colPins)*30), 40+(len(rowPins)*30), 10)
 
 	cols := len(colPins)
@@ -70,40 +98,16 @@ func CreateAnodeMatrix(rowPins, colPins []int, imageName string) {
 
 	addLEDS(&board, ledMatrix, cols, rows)
 
-	for y := range ledMatrix {
-		for x := range ledMatrix[y] {
-			top := ledMatrix[y][x].GetCathode()
-			topLED := common.NewCord(top.X+15, top.Y)
-			wire := components.NewWire(top, topLED)
-			board.AddElement(&wire)
-
-			connection := components.NewConnection(topLED)
-			board.AddElement(&connection)
-		}
-	}
+	connectLEDToVerticalWire(&board, ledMatrix, cols, rows, rowPins)
 
 	addHorizontalWires(&board, ledMatrix, cols, rows, rowPins)
 
 	addVerticalWires(&board, ledMatrix, cols, rows, colPins)
 
-	// horzonal gpio
-	for _, led := range ledMatrix[0] {
-		y := led.GetAnode().Y - 30
-		x := led.GetAnode().X + 15
-		newGPIO := components.NewGPIO(common.NewCord(x, y))
-		board.AddElement(&newGPIO)
-	}
+	addHorizontalGPIOs(&board, ledMatrix)
 
-	// vertical gpio
-	for _, led := range ledMatrix {
-		leftGPIO := common.NewCord(led[0].GetAnode().X-20, led[0].GetAnode().Y)
-		newGPIO := components.NewGPIO(leftGPIO)
-		board.AddElement(&newGPIO)
-	}
+	addVerticalGPIOs(&board, ledMatrix)
 
 	// Render board
-	err := board.Draw(realOS)
-	if err != nil {
-		log.Fatalln(err)
-	}
+	return board.Draw(o)
 }

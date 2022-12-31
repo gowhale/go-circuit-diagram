@@ -34,6 +34,11 @@ func (b *Board) AddElement(elem components.Element) {
 	b.elements = append(b.elements, elem)
 }
 
+// AddElement adds an elemnt which is rendered when Draw is called
+func (b *Board) ElementCount() int {
+	return len(b.elements)
+}
+
 func enlargeCoordintes(coords [][]int, scale int) [][]int {
 	newCoords := [][]int{}
 	for _, cord := range coords {
