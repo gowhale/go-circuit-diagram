@@ -2,10 +2,11 @@
 package main
 
 import (
-	"go-circuit-diagram/pkg/canvas"
-	"go-circuit-diagram/pkg/common"
-	"go-circuit-diagram/pkg/components"
 	"log"
+
+	"github.com/gowhale/go-circuit-diagram/pkg/canvas"
+	"github.com/gowhale/go-circuit-diagram/pkg/common"
+	"github.com/gowhale/go-circuit-diagram/pkg/components"
 )
 
 func main() {
@@ -97,7 +98,7 @@ func main() {
 
 	gpio6 := components.NewGPIO(led7.GetAnode())
 	board.AddElement(&gpio6)
-	
+
 	gpio7 := components.NewGPIO(led6.GetCathode())
 	board.AddElement(&gpio7)
 

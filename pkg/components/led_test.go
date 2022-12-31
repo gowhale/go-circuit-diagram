@@ -5,7 +5,7 @@ import (
 	"image/color"
 	"testing"
 
-	"go-circuit-diagram/pkg/common"
+	"github.com/gowhale/go-circuit-diagram/pkg/common"
 
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
@@ -87,7 +87,7 @@ func (m *ledTest) Test_Anode() {
 	l, err = NewLED(common.NewCord(0, 0), South)
 	m.Nil(err)
 	m.Equal(common.NewCord(5, 0), l.GetAnode())
-	
+
 	l, err = NewLED(common.NewCord(0, 0), West)
 	m.Nil(err)
 	m.Equal(common.NewCord(-1, 5), l.GetAnode())
@@ -97,15 +97,15 @@ func (m *ledTest) Test_Cathode() {
 	l, err := NewLED(common.NewCord(0, 0), North)
 	m.Nil(err)
 	m.Equal(common.NewCord(5, 0), l.GetCathode())
-	
+
 	l, err = NewLED(common.NewCord(0, 0), East)
 	m.Nil(err)
 	m.Equal(common.NewCord(-1, 5), l.GetCathode())
-	
+
 	l, err = NewLED(common.NewCord(0, 0), South)
 	m.Nil(err)
 	m.Equal(common.NewCord(5, 16), l.GetCathode())
-	
+
 	l, err = NewLED(common.NewCord(0, 0), West)
 	m.Nil(err)
 	m.Equal(common.NewCord(16, 5), l.GetCathode())

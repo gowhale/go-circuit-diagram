@@ -2,9 +2,10 @@ package components
 
 import (
 	"fmt"
-	"go-circuit-diagram/pkg/common"
 	"image"
 	"image/color"
+
+	"github.com/gowhale/go-circuit-diagram/pkg/common"
 )
 
 const (

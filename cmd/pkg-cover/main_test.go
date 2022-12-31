@@ -77,14 +77,14 @@ func (m *mainTest) Test_getCoverage_testLine_Pass() {
 }
 
 func (m *mainTest) Test_getCoverage_testLine_Error() {
-	tl, err := getCoverage("ok      golang-repo-test/cmd/pkg-cover      0.182s  coverage: wrong of statements")
+	tl, err := getCoverage("ok      github.com/gowhale/go-circuit-diagram/golang-repo-test/cmd/pkg-cover      0.182s  coverage: wrong of statements")
 
 	m.Equal(false, tl.coverLine)
 	m.EqualError(err, "strconv.ParseFloat: parsing \"wron\": invalid syntax")
 }
 
 func (m *mainTest) Test_getCoverage_noTestLine() {
-	tl, err := getCoverage("?       go-circuit-diagram/cmd/fruit  [no test files]")
+	tl, err := getCoverage("?       github.com/gowhale/go-circuit-diagram/go-circuit-diagram/cmd/fruit  [no test files]")
 
 	m.Equal(true, tl.coverLine)
 	m.Equal(coverageStringNotFound, tl.coverage)
@@ -92,14 +92,14 @@ func (m *mainTest) Test_getCoverage_noTestLine() {
 }
 
 func (m *mainTest) Test_getCoverage_excludedFile() {
-	tl, err := getCoverage("?       go-circuit-diagram  [no test files]")
+	tl, err := getCoverage("?       github.com/gowhale/go-circuit-diagram  [no test files]")
 
 	m.Equal(false, tl.coverLine)
 	m.Nil(err)
 }
 
 func (m *mainTest) Test_covertOutputToCoverage_noTests_Pass() {
-	commandOutput := `?       go-circuit-diagram  [no test files]
+	commandOutput := `?       github.com/gowhale/go-circuit-diagram  [no test files]
 	`
 
 	tl, err := m.executeStruct.covertOutputToCoverage(commandOutput)
@@ -108,9 +108,9 @@ func (m *mainTest) Test_covertOutputToCoverage_noTests_Pass() {
 }
 
 func (m *mainTest) Test_covertOutputToCoverage_testsLine_Pass() {
-	commandOutput := `ok      go-circuit-diagram/cmd/pkg-test      0.179s  coverage: 79% of statements
+	commandOutput := `ok      github.com/gowhale/go-circuit-diagram/cmd/pkg-test      0.179s  coverage: 79% of statements
 	`
-	expectedTl := []testLine{{pkgName: "go-circuit-diagram/cmd/pkg-test", coverage: underCoverage, coverLine: true}}
+	expectedTl := []testLine{{pkgName: "github.com/gowhale/go-circuit-diagram/cmd/pkg-test", coverage: underCoverage, coverLine: true}}
 
 	tl, err := m.executeStruct.covertOutputToCoverage(commandOutput)
 	m.Equal(tl, expectedTl)
@@ -118,7 +118,7 @@ func (m *mainTest) Test_covertOutputToCoverage_testsLine_Pass() {
 }
 
 func (m *mainTest) Test_covertOutputToCoverage_testsLine_Fail() {
-	commandOutput := `ok      go-circuit-diagram/cmd/pkg-test      0.179s  coverage: wrong% of statements
+	commandOutput := `ok      github.com/gowhale/go-circuit-diagram/cmd/pkg-test      0.179s  coverage: wrong% of statements
 	`
 
 	tl, err := m.executeStruct.covertOutputToCoverage(commandOutput)
@@ -127,17 +127,17 @@ func (m *mainTest) Test_covertOutputToCoverage_testsLine_Fail() {
 }
 
 func (m *mainTest) Test_validateTestOutput_sufficentCov_testLine() {
-	expectedTl := []testLine{{pkgName: "go-circuit-diagram/cmd/pkg-pizza", coverage: overCoverage, coverLine: true}}
+	expectedTl := []testLine{{pkgName: "github.com/gowhale/go-circuit-diagram/cmd/pkg-pizza", coverage: overCoverage, coverLine: true}}
 
 	err := m.executeStruct.validateTestOutput(expectedTl, fruits.Apple)
 	m.Nil(err)
 }
 
 func (m *mainTest) Test_validateTestOutput_NOT_sufficentCov_testLine() {
-	expectedTl := []testLine{{pkgName: "go-circuit-diagram/cmd/pkg-test", coverage: underCoverage, coverLine: true}}
+	expectedTl := []testLine{{pkgName: "github.com/gowhale/go-circuit-diagram/cmd/pkg-test", coverage: underCoverage, coverLine: true}}
 
 	err := m.executeStruct.validateTestOutput(expectedTl, fruits.Apple)
-	m.EqualError(err, "the following pkgs are not valid: [pkg=go-circuit-diagram/cmd/pkg-test cov=79.000000 under the 80.000000% minimum line coverage]")
+	m.EqualError(err, "the following pkgs are not valid: [pkg=github.com/gowhale/go-circuit-diagram/cmd/pkg-test cov=79.000000 under the 80.000000% minimum line coverage]")
 }
 
 func (m *mainTest) Test_validateTestOutput_testLine_missing_tests() {

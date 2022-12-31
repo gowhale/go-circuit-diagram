@@ -1,9 +1,10 @@
 package components
 
 import (
-	"go-circuit-diagram/pkg/common"
 	"image/color"
 	"testing"
+
+	"github.com/gowhale/go-circuit-diagram/pkg/common"
 
 	"github.com/stretchr/testify/suite"
 )
