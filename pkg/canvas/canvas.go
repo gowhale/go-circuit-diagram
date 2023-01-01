@@ -34,6 +34,11 @@ func (b *Board) AddElement(elem components.Element) {
 	b.elements = append(b.elements, elem)
 }
 
+// ElementCount returns the amount of elements on a board
+func (b *Board) ElementCount() int {
+	return len(b.elements)
+}
+
 func enlargeCoordintes(coords [][]int, scale int) [][]int {
 	newCoords := [][]int{}
 	for _, cord := range coords {

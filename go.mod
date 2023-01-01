@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/gowhale/go-test-data v1.0.0
-	github.com/gowhale/led-matrix-golang v1.0.2-0.20221231161538-dc754bb2505c
+	github.com/gowhale/led-matrix-golang v1.0.2
 	github.com/stretchr/testify v1.8.0
 )
 
