@@ -54,7 +54,7 @@ func addHorizontalWires(board *canvas.Board, ledMatrix [][]components.LEDConfig,
 	}
 }
 
-func connectLEDToVerticalWire(board *canvas.Board, ledMatrix [][]components.LEDConfig, cols, rows int, pins []int) {
+func connectLEDToVerticalWire(board *canvas.Board, ledMatrix [][]components.LEDConfig) {
 	for y := range ledMatrix {
 		for x := range ledMatrix[y] {
 			top := ledMatrix[y][x].GetCathode()
@@ -98,7 +98,7 @@ func CreateAnodeMatrix(o common.OS, rowPins, colPins []int, imageName string) er
 
 	addLEDS(&board, ledMatrix, cols, rows)
 
-	connectLEDToVerticalWire(&board, ledMatrix, cols, rows, rowPins)
+	connectLEDToVerticalWire(&board, ledMatrix)
 
 	addHorizontalWires(&board, ledMatrix, cols, rows, rowPins)
 

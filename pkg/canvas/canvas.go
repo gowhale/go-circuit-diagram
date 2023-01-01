@@ -34,7 +34,7 @@ func (b *Board) AddElement(elem components.Element) {
 	b.elements = append(b.elements, elem)
 }
 
-// AddElement adds an elemnt which is rendered when Draw is called
+// ElementCount returns the amount of elements on a board
 func (b *Board) ElementCount() int {
 	return len(b.elements)
 }
