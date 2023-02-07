@@ -47,3 +47,51 @@ func (s *ShiftConfig) GetPin1() common.Coordinate {
 func (s *ShiftConfig) GetPin2() common.Coordinate {
 	return common.NewCord(s.startCoord.GetX()-1, s.startCoord.GetY()+6)
 }
+
+func (s *ShiftConfig) GetPin3() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()-1, s.startCoord.GetY()+10)
+}
+
+func (s *ShiftConfig) GetPin4() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()-1, s.startCoord.GetY()+14)
+}
+
+func (s *ShiftConfig) GetPin5() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()-1, s.startCoord.GetY()+18)
+}
+
+func (s *ShiftConfig) GetPin6() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()-1, s.startCoord.GetY()+22)
+}
+
+func (s *ShiftConfig) GetPin7() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()-1, s.startCoord.GetY()+26)
+}
+
+func (s *ShiftConfig) GetPin11() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()+len(shiftPixels[0]), s.startCoord.GetY()+2)
+}
+
+func (s *ShiftConfig) GetPin12() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()+len(shiftPixels[0]), s.startCoord.GetY()+6)
+}
+
+func (s *ShiftConfig) GetPin13() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()+len(shiftPixels[0]), s.startCoord.GetY()+10)
+}
+
+func (s *ShiftConfig) GetPin14() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()+len(shiftPixels[0]), s.startCoord.GetY()+14)
+}
+
+func (s *ShiftConfig) GetPin15() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()+len(shiftPixels[0]), s.startCoord.GetY()+18)
+}
+
+func (s *ShiftConfig) GetPin16() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()+len(shiftPixels[0]), s.startCoord.GetY()+22)
+}
+
+func (s *ShiftConfig) GetPin17() common.Coordinate {
+	return common.NewCord(s.startCoord.GetX()+len(shiftPixels[0]), s.startCoord.GetY()+26)
+}
