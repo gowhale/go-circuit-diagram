@@ -1,3 +1,4 @@
+// Package main will show a sample shift register components
 package main
 
 import (

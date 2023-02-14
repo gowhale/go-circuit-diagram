@@ -13,7 +13,7 @@ type ShiftConfig struct {
 	Colour     color.Color
 }
 
-// NewLED returns a LED config starting from specified x,y
+// NewShift returns a Shift register config starting from specified x,y cordinate
 func NewShift(startCoord common.Coordinate) ShiftConfig {
 	return ShiftConfig{
 		startCoord: startCoord,
